@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_a/screens/User/home_Slide/slideProfil.dart';
 import 'package:project_a/screens/User/user_Setting.dart';
+
+import 'home_Slide/slide_Home.dart';
 
 class userHome extends StatefulWidget {
   @override
@@ -9,11 +12,16 @@ class userHome extends StatefulWidget {
 
 class _userHomeState extends State<userHome> {
   int selectedBotAppBarIndex = 0;
-  List<Widget>barPages;
-
+  List<Widget> barPages;
+  homeBody homeBodyP;
+  profileBody profileBodyP;
 
   @override
   void initState() {
+    homeBodyP = homeBody();
+    profileBodyP = profileBody();
+
+    barPages = [homeBodyP, profileBodyP, homeBodyP,profileBodyP];
   }
 
   @override
@@ -51,33 +59,14 @@ class _userHomeState extends State<userHome> {
             color: Colors.black45,
             icon: Icon(Icons.settings),
             tooltip: "Setting",
-            onPressed: () { Navigator.push(context,
-                MaterialPageRoute(builder: (context) => userSetting()));},
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => userSetting()));
+            },
           ),
         ],
       ),
-      body: Container(
-        color: Color(0xfff1faee),
-        height: double.infinity,
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Container(height: 180, child: _cubeBox()),
-            Container(
-              height: 324,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(50),
-                    topRight: Radius.circular(50)),
-                color: Colors.blueGrey,
-              ),
-            )
-          ],
-        ),
-      ),
+      body: barPages[selectedBotAppBarIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("Home")),
@@ -85,59 +74,16 @@ class _userHomeState extends State<userHome> {
               icon: Icon(Icons.supervised_user_circle), title: Text("Profile")),
           BottomNavigationBarItem(
               icon: Icon(Icons.settings), title: Text("Setting")),
+         BottomNavigationBarItem(
+            icon: Icon(Icons.add_circle_outline), title: Text("Add")),
         ],
+        type: BottomNavigationBarType.fixed,
         currentIndex: selectedBotAppBarIndex,
         onTap: (index) {
           setState(() {
             selectedBotAppBarIndex = index;
-
-
           });
         },
-      ),
-    );
-  }
-
-  Widget _cubeBox() {
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30))),
-      child: ListView(
-        padding: EdgeInsets.only(right: 15),
-        scrollDirection: Axis.horizontal,
-        children: [_boxDen(), _boxDen(), _boxDen(), _boxDen()],
-      ),
-    );
-  }
-
-  Widget _boxDen() {
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Color(0xFFb7b7a4).withOpacity(0.1)),
-      margin: EdgeInsets.only(top: 25, bottom: 15, left: 15, right: 0),
-      child: Column(
-        children: [
-          Container(
-            height: 100.0,
-            width: 100.0,
-            child: Image.asset(
-              'assets/icons/savewater.png',
-              cacheHeight: 60,
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadiusDirectional.circular(10.0),
-              gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: [
-                    Color(0xFFD9AFD9),
-                    Color(0xFF97D9E1),
-                  ]),
-            ),
-          ),
-          Text("Deneme \n dadad"),
-        ],
       ),
     );
   }

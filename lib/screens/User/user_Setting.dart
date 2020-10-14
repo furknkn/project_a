@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_a/Provider/fireBase_Provider.dart';
 import 'package:project_a/repo/User_Repository.dart';
+import 'package:project_a/screens/User/user_Edit_Profile.dart';
 import 'package:provider/provider.dart';
 
 class userSetting extends StatelessWidget {
@@ -13,13 +14,13 @@ class userSetting extends StatelessWidget {
         backgroundColor: Colors.white,
         centerTitle: true,
         leading: GestureDetector(
-          onTap: (){
-            Navigator.pop(context);
-          },
+            onTap: () {
+              Navigator.pop(context);
+            },
             child: Icon(
-          Icons.arrow_back_ios,
-          color: Colors.black,
-        )),
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            )),
         title: Text(
           "Options",
           style: TextStyle(color: Colors.black),
@@ -39,6 +40,12 @@ class userSetting extends StatelessWidget {
                       ),
                     ),
                     ListTile(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => userEditProfile()));
+                      },
                       leading: Icon(Icons.accessible),
                       title: Text("Edit Profile"),
                       trailing: Icon(Icons.arrow_forward_ios),

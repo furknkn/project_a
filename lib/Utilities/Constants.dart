@@ -11,7 +11,10 @@ final kLabelStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontFamily: 'fontNoto',
 );
-
+final kLabelTitle=TextStyle(
+  color: Colors.black,
+  fontSize: 24,
+);
 final kBoxDecorationStyle = BoxDecoration(
   color: Color(0xFF6CA8F1),
   borderRadius: BorderRadius.circular(10.0),
